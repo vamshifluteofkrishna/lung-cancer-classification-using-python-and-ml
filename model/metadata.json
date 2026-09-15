@@ -1,0 +1,194 @@
+{
+  "feature_names": [
+    "Age",
+    "Gender",
+    "Air Pollution",
+    "Alcohol use",
+    "Dust Allergy",
+    "chronic Lung Disease",
+    "Balanced Diet",
+    "Obesity",
+    "Smoking",
+    "Passive Smoker",
+    "Chest Pain",
+    "Coughing of Blood",
+    "Fatigue",
+    "Weight Loss",
+    "Shortness of Breath",
+    "Wheezing",
+    "Swallowing Difficulty",
+    "Clubbing of Finger Nails",
+    "Frequent Cold",
+    "Dry Cough",
+    "Snoring",
+    "Level"
+  ],
+  "feature_count": 22,
+  "mappings": {
+    "Level": {
+      "Low": 0,
+      "Medium": 1,
+      "High": 2
+    },
+    "Gender": {
+      "Male": 0,
+      "Female": 1
+    },
+    "Result": {
+      "0": "Low Risk (Negative)",
+      "1": "High Risk (Positive)"
+    }
+  },
+  "imputed_columns": [
+    "Alcohol use",
+    "OccuPational Hazards",
+    "Obesity",
+    "Smoking",
+    "Weight Loss"
+  ],
+  "feature_schema": {
+    "Age": {
+      "min": 14.0,
+      "max": 73.0,
+      "default": 37.2
+    },
+    "Gender": {
+      "min": 0.0,
+      "max": 1.0,
+      "default": 0.4
+    },
+    "Air Pollution": {
+      "min": 1.0,
+      "max": 8.0,
+      "default": 3.8
+    },
+    "Alcohol use": {
+      "min": 1.0,
+      "max": 8.0,
+      "default": 4.5
+    },
+    "Dust Allergy": {
+      "min": 1.0,
+      "max": 8.0,
+      "default": 5.2
+    },
+    "chronic Lung Disease": {
+      "min": 1.0,
+      "max": 7.0,
+      "default": 4.4
+    },
+    "Balanced Diet": {
+      "min": 1.0,
+      "max": 7.0,
+      "default": 4.5
+    },
+    "Obesity": {
+      "min": 1.0,
+      "max": 7.0,
+      "default": 4.4
+    },
+    "Smoking": {
+      "min": 1.0,
+      "max": 8.0,
+      "default": 3.9
+    },
+    "Passive Smoker": {
+      "min": 1.0,
+      "max": 8.0,
+      "default": 4.2
+    },
+    "Chest Pain": {
+      "min": 1.0,
+      "max": 9.0,
+      "default": 4.4
+    },
+    "Coughing of Blood": {
+      "min": 1.0,
+      "max": 9.0,
+      "default": 4.9
+    },
+    "Fatigue": {
+      "min": 1.0,
+      "max": 9.0,
+      "default": 3.9
+    },
+    "Weight Loss": {
+      "min": 1.0,
+      "max": 8.0,
+      "default": 3.8
+    },
+    "Shortness of Breath": {
+      "min": 1.0,
+      "max": 9.0,
+      "default": 4.2
+    },
+    "Wheezing": {
+      "min": 1.0,
+      "max": 8.0,
+      "default": 3.8
+    },
+    "Swallowing Difficulty": {
+      "min": 1.0,
+      "max": 8.0,
+      "default": 3.7
+    },
+    "Clubbing of Finger Nails": {
+      "min": 1.0,
+      "max": 9.0,
+      "default": 3.9
+    },
+    "Frequent Cold": {
+      "min": 1.0,
+      "max": 7.0,
+      "default": 3.5
+    },
+    "Dry Cough": {
+      "min": 1.0,
+      "max": 7.0,
+      "default": 3.9
+    },
+    "Snoring": {
+      "min": 1.0,
+      "max": 7.0,
+      "default": 2.9
+    },
+    "Level": {
+      "min": 0.0,
+      "max": 2.0,
+      "default": 1.1
+    }
+  },
+  "primary_metrics": {
+    "model_name": "Random Forest Classifier",
+    "n_estimators": 50,
+    "train_accuracy": 0.7453333333333333,
+    "test_accuracy": 0.544,
+    "precision": 0.5894736842105263,
+    "recall": 0.7567567567567568,
+    "f1_score": 0.6627218934911243,
+    "confusion_matrix": [
+      [
+        24,
+        78
+      ],
+      [
+        36,
+        112
+      ]
+    ]
+  },
+  "benchmarks": {
+    "Decision Tree": {
+      "train_accuracy": 0.7453333333333333,
+      "test_accuracy": 0.492
+    },
+    "Gaussian Naive Bayes": {
+      "train_accuracy": 0.6,
+      "test_accuracy": 0.568
+    },
+    "Support Vector Machine": {
+      "train_accuracy": 0.6346666666666667,
+      "test_accuracy": 0.588
+    }
+  }
+}

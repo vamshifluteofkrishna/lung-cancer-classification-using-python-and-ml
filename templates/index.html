@@ -1,0 +1,212 @@
+{% extends 'base.html' %}
+
+{% block title %}Lung Cancer Prediction | Modern Clinical ML Screening Platform{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-section">
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-content">
+        <div class="badge-tag">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          </svg>
+          Clinical AI Diagnostic Screening
+        </div>
+
+        <h1 class="hero-title">
+          Early Risk Detection with <span class="gradient-text">Machine Learning</span>
+        </h1>
+
+        <p class="hero-subtitle">
+          Estimate lung cancer risk probability using validated clinical indicators, lifestyle patterns, and respiratory symptom scores. Built with a verified 50-estimator Random Forest ensemble trained on comprehensive patient data.
+        </p>
+
+        <div class="hero-actions">
+          <a href="{{ url_for('predict') }}" class="btn btn-primary btn-lg">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="9 18 15 12 9 6"/>
+            </svg>
+            Start Risk Assessment
+          </a>
+          <a href="{{ url_for('about') }}" class="btn btn-secondary btn-lg">
+            View Model Benchmarks
+          </a>
+        </div>
+
+        <div class="hero-stats">
+          <div class="stat-item">
+            <h3>22</h3>
+            <p>Clinical Indicators Evaluated</p>
+          </div>
+          <div class="stat-item">
+            <h3>1,000</h3>
+            <p>Patient Cohort Dataset</p>
+          </div>
+          <div class="stat-item">
+            <h3>74.5%</h3>
+            <p>Model Training Accuracy</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hero Visual Card -->
+      <div class="hero-visual">
+        <div class="medical-graphic-card">
+          <div class="graphic-header">
+            <div class="graphic-icon-wrap">
+              <div class="graphic-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                </svg>
+              </div>
+              <div>
+                <div class="graphic-title">Assessment Engine</div>
+                <div style="font-size: 0.75rem; color: var(--slate-400);">Real-time feature normalization</div>
+              </div>
+            </div>
+            <span class="graphic-pill">Status: Online</span>
+          </div>
+
+          <div class="radar-preview">
+            <div class="preview-bar-row">
+              <div class="preview-bar-label">
+                <span>Pulmonary Symptoms (Hemoptysis, Dyspnea)</span>
+                <span>Normal Range</span>
+              </div>
+              <div class="progress-track">
+                <div class="progress-fill teal" style="width: 35%;"></div>
+              </div>
+            </div>
+
+            <div class="preview-bar-row">
+              <div class="preview-bar-label">
+                <span>Environmental & Lifestyle Exposure</span>
+                <span>Moderate</span>
+              </div>
+              <div class="progress-track">
+                <div class="progress-fill blue" style="width: 55%;"></div>
+              </div>
+            </div>
+
+            <div class="preview-bar-row">
+              <div class="preview-bar-label">
+                <span>Systemic Clinical History</span>
+                <span>Low Risk</span>
+              </div>
+              <div class="progress-track">
+                <div class="progress-fill amber" style="width: 25%;"></div>
+              </div>
+            </div>
+          </div>
+
+          <div style="background: var(--slate-50); border-radius: var(--radius-md); padding: 1rem; border: 1px solid var(--slate-200); display: flex; align-items: center; justify-content: space-between;">
+            <div>
+              <div style="font-size: 0.8rem; font-weight: 600; color: var(--slate-700);">Random Forest Classifier</div>
+              <div style="font-size: 0.75rem; color: var(--slate-400);">50 Decision Trees &bull; Probability Scoring</div>
+            </div>
+            <span style="font-size: 0.8rem; font-weight: 700; color: var(--safe-green); background: var(--safe-bg); padding: 0.25rem 0.6rem; border-radius: 4px;">
+              Ready
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- How It Works Section -->
+<section class="section" style="background: var(--white); border-top: 1px solid var(--slate-200); border-bottom: 1px solid var(--slate-200);">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-subtitle">System Workflow</div>
+      <h2 class="section-title">How the Prediction Pipeline Operates</h2>
+    </div>
+
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-num">01</div>
+        <h3>Clinical Input Intake</h3>
+        <p>Enter patient demographics, lifestyle habits, respiratory symptoms, and medical history using our structured clinical rating scales.</p>
+      </div>
+
+      <div class="step-card">
+        <div class="step-num">02</div>
+        <h3>Data Imputation & Scaling</h3>
+        <p>Values are standardized using the exact statistical imputers and MinMaxScaler trained on the original 1,000-patient dataset.</p>
+      </div>
+
+      <div class="step-card">
+        <div class="step-num">03</div>
+        <h3>Ensemble Risk Estimation</h3>
+        <p>The Random Forest model calculates class probability, evaluates critical risk thresholds, and presents an interpretable clinical report.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Features Section -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-subtitle">Core Capabilities</div>
+      <h2 class="section-title">Designed for Clinical Clarity & Precision</h2>
+    </div>
+
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+            <polyline points="14 2 14 8 20 8"/>
+            <line x1="16" y1="13" x2="8" y2="13"/>
+            <line x1="16" y1="17" x2="8" y2="17"/>
+            <polyline points="10 9 9 9 8 9"/>
+          </svg>
+        </div>
+        <h3>22 Clinical Parameters</h3>
+        <p>Analyzes multiple physiological dimensions including hemoptysis, dyspnea, smoking exposure, chest pain, and chronic lung disease.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <polyline points="12 6 12 12 16 14"/>
+          </svg>
+        </div>
+        <h3>Risk Probability Gauge</h3>
+        <p>Provides exact risk confidence percentages derived from the ensemble decision voting distribution rather than just a binary output.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
+          </svg>
+        </div>
+        <h3>High-Impact Symptom Identification</h3>
+        <p>Highlights severe symptoms that contribute disproportionately to elevated risk predictions for clearer clinician review.</p>
+      </div>
+    </div>
+
+    <!-- Medical Disclaimer Banner -->
+    <div class="disclaimer-banner">
+      <div class="disclaimer-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+          <line x1="12" y1="9" x2="12" y2="13"/>
+          <line x1="12" y1="17" x2="12.01" y2="17"/>
+        </svg>
+      </div>
+      <div class="disclaimer-content">
+        <h4>Important Medical Screening Disclaimer</h4>
+        <p>
+          This web application is an educational and research demonstration tool based on machine learning models trained on survey and clinical correlation data. It is <strong>NOT</strong> a substitute for professional medical advice, clinical diagnostic imaging (such as Low-Dose CT scans), or histological biopsy. If you or someone you know is experiencing symptoms like persistent coughing of blood or shortness of breath, please seek immediate medical consultation.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

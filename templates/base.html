@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Lung Cancer Prediction | Clinical Machine Learning Risk Assessment{% endblock %}</title>
+  <meta name="description" content="A clinical-grade machine learning application to estimate lung cancer risk based on validated patient lifestyle and symptom indicators.">
+  
+  <!-- Modern Google Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- CSS Stylesheet -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  {% block extra_head %}{% endblock %}
+</head>
+<body>
+
+  <!-- Site Navigation -->
+  <header class="site-header">
+    <div class="container">
+      <nav class="navbar" aria-label="Main Navigation">
+        <a href="{{ url_for('home') }}" class="brand">
+          <div class="brand-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+              <circle cx="12" cy="12" r="9"/>
+            </svg>
+          </div>
+          <div class="brand-text">Lung<span>Cancer</span>Predict</div>
+        </a>
+
+        <ul class="nav-links">
+          <li><a href="{{ url_for('home') }}" class="nav-link {% if request.endpoint == 'home' %}active{% endif %}">Home</a></li>
+          <li><a href="{{ url_for('predict') }}" class="nav-link {% if request.endpoint == 'predict' %}active{% endif %}">Risk Assessment</a></li>
+          <li><a href="{{ url_for('about') }}" class="nav-link {% if request.endpoint == 'about' %}active{% endif %}">Model & Dataset</a></li>
+          <li><a href="{{ url_for('predict') }}" class="btn btn-primary btn-sm">Start Prediction</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content Block -->
+  <main id="main-content">
+    {% block content %}{% endblock %}
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-content">
+        <div>
+          <strong>Lung Cancer Prediction System</strong>
+          <p style="margin-top: 4px; font-size: 0.85rem; color: var(--slate-400);">
+            Machine Learning Diagnostic Screening Platform &bull; Powered by Random Forest Classifier
+          </p>
+        </div>
+
+        <ul class="footer-links">
+          <li><a href="{{ url_for('home') }}">Home</a></li>
+          <li><a href="{{ url_for('predict') }}">Risk Assessment</a></li>
+          <li><a href="{{ url_for('about') }}">Research & Citations</a></li>
+        </ul>
+      </div>
+
+      <div style="margin-top: 1.5rem; padding-top: 1.25rem; border-top: 1px solid var(--slate-100); font-size: 0.8rem; color: var(--slate-400); text-align: center;">
+        Disclaimer: This application is a machine-learning research demonstration tool. It does not provide medical advice, diagnosis, or clinical treatment plans. Always consult a licensed healthcare professional for medical concerns.
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+  {% block extra_scripts %}{% endblock %}
+</body>
+</html>

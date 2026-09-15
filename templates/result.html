@@ -1,0 +1,177 @@
+{% extends 'base.html' %}
+
+{% block title %}Risk Assessment Result | Lung Cancer Prediction{% endblock %}
+
+{% block content %}
+<section class="result-page">
+  <div class="container">
+
+    <!-- Back link -->
+    <div style="margin-bottom: 1.5rem;">
+      <a href="{{ url_for('predict') }}" style="color: var(--slate-500); text-decoration: none; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 6px; font-weight: 500;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="15 18 9 12 15 6"/>
+        </svg>
+        Back to Risk Assessment Form
+      </a>
+    </div>
+
+    <!-- Main Diagnostic Result Card -->
+    <div class="result-card-main status-{{ result_status }}">
+      
+      <!-- Result Hero -->
+      <div class="result-hero">
+        <div>
+          <div class="result-badge {{ result_status }}">
+            {% if prediction == 1 %}
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <circle cx="12" cy="12" r="10"/>
+              <line x1="12" y1="8" x2="12" y2="12"/>
+              <line x1="12" y1="16" x2="12.01" y2="16"/>
+            </svg>
+            {% else %}
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+              <polyline points="22 4 12 14.01 9 11.01"/>
+            </svg>
+            {% endif %}
+            {{ result_badge }}
+          </div>
+
+          <h1 class="result-title">{{ result_title }}</h1>
+          <p class="result-desc">{{ summary_message }}</p>
+
+          <div style="margin-top: 1.5rem; display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;">
+            <div style="font-size: 0.85rem; color: var(--slate-500);">
+              Evaluation Algorithm: <strong>Random Forest Ensemble (50 estimators)</strong>
+            </div>
+          </div>
+        </div>
+
+        <!-- Risk Gauge Box -->
+        <div class="gauge-box">
+          <div class="gauge-circle" style="background: conic-gradient(
+            {% if prediction == 1 %}var(--danger-red){% else %}var(--safe-green){% endif %} {{ risk_percentage * 3.6 }}deg,
+            var(--slate-200) 0deg
+          );">
+            <div class="gauge-inner">
+              <span class="percent">{{ risk_percentage }}%</span>
+              <span class="label">Estimated Risk</span>
+            </div>
+          </div>
+
+          <div class="gauge-probabilities">
+            <span>Low Risk: <strong>{{ prob_low }}%</strong></span>
+            <span>High Risk: <strong>{{ prob_high }}%</strong></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contributing Factors (if any are elevated) -->
+      {% if contributing_factors %}
+      <div class="factors-section">
+        <h3>Elevated Clinical & Lifestyle Indicators</h3>
+        <p>The following patient indicators scored above baseline thresholds and contributed toward the risk assessment:</p>
+        
+        <div class="factors-grid">
+          {% for factor in contributing_factors %}
+          <div class="factor-chip">
+            <div>
+              <div class="factor-name">{{ factor.label }}</div>
+              <div style="font-size: 0.75rem; color: var(--slate-400);">Severity score: {{ factor.value }} / {{ factor.max }}</div>
+            </div>
+            <span class="factor-score {{ factor.severity|lower }}">
+              {{ factor.severity }} Alert
+            </span>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+      {% endif %}
+
+      <!-- Patient Submitted Profile Summary -->
+      <div class="summary-table-section">
+        <h3>Submitted Clinical Parameters</h3>
+        <p style="font-size: 0.85rem; color: var(--slate-500); margin-bottom: 1.25rem;">
+          Verified feature set normalized and evaluated by the MinMaxScaler pipeline:
+        </p>
+
+        <div style="overflow-x: auto;">
+          <table class="patient-data-table">
+            <thead>
+              <tr>
+                <th>Clinical Parameter</th>
+                <th>Submitted Value</th>
+                <th>Diagnostic Category</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for feature, val in submitted_data.items() %}
+              <tr>
+                <td>{{ feature_labels.get(feature, feature) }}</td>
+                <td>
+                  <strong>{{ val }}</strong>
+                  {% if feature in ['Smoking', 'Passive Smoker', 'Alcohol use', 'Air Pollution', 'Chest Pain', 'Coughing of Blood', 'Shortness of Breath'] %}
+                    <span style="font-size: 0.8rem; color: var(--slate-400); margin-left: 4px;">(Scale rating)</span>
+                  {% endif %}
+                </td>
+                <td style="color: var(--slate-500); font-size: 0.85rem;">
+                  {% if feature in ['Age', 'Gender', 'Level'] %}
+                    Demographic / Stratification
+                  {% elif feature in ['Smoking', 'Passive Smoker', 'Alcohol use', 'Air Pollution', 'Balanced Diet', 'Obesity'] %}
+                    Lifestyle & Environmental
+                  {% elif feature in ['Chest Pain', 'Coughing of Blood', 'Shortness of Breath', 'Wheezing', 'Dry Cough', 'Swallowing Difficulty'] %}
+                    Respiratory / Pulmonary
+                  {% else %}
+                    Systemic & Medical History
+                  {% endif %}
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="result-actions">
+      <a href="{{ url_for('predict') }}" class="btn btn-primary btn-lg">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="1 4 1 10 7 10"/>
+          <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/>
+        </svg>
+        Assess Another Patient
+      </a>
+
+      <button type="button" id="btn-print-report" class="btn btn-secondary btn-lg">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="6 9 6 2 18 2 18 9"/>
+          <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/>
+          <rect x="6" y="14" width="12" height="8"/>
+        </svg>
+        Print / Save Clinical Summary
+      </button>
+    </div>
+
+    <!-- Important Medical Disclaimer Banner -->
+    <div class="disclaimer-banner" style="margin-top: 3rem;">
+      <div class="disclaimer-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+          <line x1="12" y1="9" x2="12" y2="13"/>
+          <line x1="12" y1="17" x2="12.01" y2="17"/>
+        </svg>
+      </div>
+      <div class="disclaimer-content">
+        <h4>Diagnostic Boundary Notice</h4>
+        <p>
+          This result is generated by a statistical machine learning model and <strong>must NOT be construed as a confirmed medical diagnosis or biopsy validation</strong>. Clinical oncology requires physical examinations, Low-Dose Computed Tomography (LDCT), bronchoscopy, and histological pathology. Please refer patients with elevated symptom scores to a licensed pulmonologist or oncology specialist.
+        </p>
+      </div>
+    </div>
+
+  </div>
+</section>
+{% endblock %}

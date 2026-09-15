@@ -1,0 +1,77 @@
+﻿# ===========================
+# Python
+# ===========================
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+*.pyd
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+
+# ===========================
+# Virtual Environments
+# ===========================
+venv/
+env/
+ENV/
+.venv/
+.env/
+virtualenv/
+
+# ===========================
+# Jupyter Notebook
+# ===========================
+.ipynb_checkpoints/
+nb_cells.txt
+nb_outputs.txt
+
+# ===========================
+# Environment Variables
+# ===========================
+.env
+.env.local
+*.env
+
+# ===========================
+# Machine Learning / Model Files
+# ===========================
+*.pkl
+*.pickle
+*.h5
+*.hdf5
+*.joblib
+*.model
+
+# ===========================
+# IDEs and Editors
+# ===========================
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ===========================
+# Logs and Temp Files
+# ===========================
+*.log
+*.tmp
+*.temp
+logs/
+
+# ===========================
+# Flask
+# ===========================
+instance/
+flask_session/
+
+# ===========================
+# OS Files
+# ===========================
+.DS_Store
+Desktop.ini
+Thumbs.db
